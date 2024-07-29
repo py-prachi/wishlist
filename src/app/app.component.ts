@@ -18,9 +18,24 @@ export class AppComponent {
     new WishItem("drink Water")
   ];
   newWishText = '';
+  filterOption = '0';
+
   addNewWish(){
     console.log(this.newWishText);
     this.items.push(new WishItem(this.newWishText, false ))
+    this.newWishText = '' 
+  }
+
+  
+  get visibleItems(): WishItem[]{
+    let value = this.filterOption;
+    if (value === '0'){
+      return(this.items)
+    }else if(value === '1'){
+     return this.items.filter(item => item.isComplete)
+    }else{
+      return this.items.filter(item => !item.isComplete)
+    }
   }
   
   toggleItem(item:WishItem){

@@ -6,7 +6,7 @@
       <input
         type="text"
         id="wish"
-        name="wish"
+        name="new-wish-text"
         class="form-control"
         [(ngModel)] =  "newWishText"
       />
@@ -17,26 +17,44 @@
     
   </form>
 
-  <div *ngIf="items.length === 0;else showItems"> 
-    There are no items to display
+<div class="row mt-3">
+  <div class="col-sm-2">
+    <select 
+    class="form-select"
+    [(ngModel)] = "filterOption"
+
+    >
+      <option value="0">All</option>
+      <option value="1">Fulfilled</option>
+      <option value="2">Unfulfilled</option>
+    </select>
   </div>
 
-  <ng-template #showItems>
-    <ul class="wish-list"> 
-      <li *ngFor="let item of items">
-        <div class="form-check">
-          <label class="form-check-label">
-          <input 
-          class="checkbox" 
-          type="checkbox"
-          [checked]="item.isComplete"
-          [attr.data-index]=""
-          (click)="toggleItem(item)"
-          > {{item.wishText}}
-          </label>
-        </div>
-      </li>
-    </ul>
-  </ng-template>
+</div>
+
+  <div class="mt-5">
+    <div *ngIf="visibleItems.length === 0;else showItems"> 
+      There are no items to display
+    </div>
+  
+    <ng-template #showItems>
+      <ul class="wish-list"> 
+        <li *ngFor="let item of visibleItems">
+          <div class="form-check">
+            <label class="form-check-label">
+            <input 
+            class="checkbox" 
+            type="checkbox"
+            [checked]="item.isComplete"
+            [attr.data-index]=""
+            (click)="toggleItem(item)"
+            > {{item.wishText}}
+            </label>
+          </div>
+        </li>
+      </ul>
+    </ng-template>
+   </div>
+  
   
 </div>
