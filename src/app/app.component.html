@@ -8,10 +8,11 @@
         id="wish"
         name="wish"
         class="form-control"
+        [(ngModel)] =  "newWishText"
       />
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary">Add Wish</button> 
+      <button type="submit" class="btn btn-primary" (click)="addNewWish()">Add Wish</button> 
     </div>
     
   </form>
