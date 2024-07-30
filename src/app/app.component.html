@@ -1,60 +1,22 @@
 <div class="container">
 
-  <form class="row mt-3 gx-3 gy-2 align-items-center justify-content-cennter">
-    <div class="col-sm-6">
-      <label class="visually-hidden" for="specificSizeInputName">Wish</label>
-      <input
-        type="text"
-        id="wish"
-        name="new-wish-text"
-        class="form-control"
-        [(ngModel)] =  "newWishText"
-      />
-    </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-primary" (click)="addNewWish()">Add Wish</button> 
-    </div>
-    
-  </form>
-
-<div class="row mt-3">
-  <div class="col-sm-2">
-    <select 
-    class="form-select"
-    [(ngModel)] = "filterOption"
-
-    >
-      <option value="0">All</option>
-      <option value="1">Fulfilled</option>
-      <option value="2">Unfulfilled</option>
-    </select>
-  </div>
-
+<div>  
+  <add-wish-form
+  (addWish)="items.push($event)" 
+  ></add-wish-form>
 </div>
 
-  <div class="mt-5">
-    <div *ngIf="visibleItems.length === 0;else showItems"> 
-      There are no items to display
-    </div>
-  
-    <ng-template #showItems>
-      <ul class="wish-list"> 
-        <li *ngFor="let item of visibleItems">
-          <div class="form-check">
-            <label class="form-check-label">
-            <input 
-            class="checkbox" 
-            type="checkbox"
-            [checked]="item.isComplete"
-            [attr.data-index]=""
-            (click)="toggleItem(item)"
-            > {{item.wishText}}
-            </label>
-          </div>
-        </li>
-      </ul>
-    </ng-template>
-   </div>
+<div class="row mt-3">
+  <wish-filter 
+  [(filter)]="filter"
+  ></wish-filter>
+</div>
+
+<div class="row mt-3">
+  <wish-list
+    [wishes] = "items.filter(filter)"
+  ></wish-list>
+</div>
   
   
 </div>

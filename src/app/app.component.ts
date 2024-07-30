@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { WishItem } from './shared/models/wishitems';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { WishListComponent } from './wish-list/wish-list.component';
+import { AddWishFormComponent } from "./add-wish-form/add-wish-form.component";
+import { WishFilterComponent } from './wish-filter/wish-filter.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-imports:[CommonModule , FormsModule]
+imports: [CommonModule, FormsModule, WishListComponent, AddWishFormComponent, WishFilterComponent]
   
 })
 export class AppComponent {
@@ -17,31 +20,7 @@ export class AppComponent {
     new WishItem("Have a coffee", true),
     new WishItem("drink Water")
   ];
-  newWishText = '';
-  filterOption = '0';
 
-  addNewWish(){
-    console.log(this.newWishText);
-    this.items.push(new WishItem(this.newWishText, false ))
-    this.newWishText = '' 
-  }
-
+  filter: any = () => {};
   
-  get visibleItems(): WishItem[]{
-    let value = this.filterOption;
-    if (value === '0'){
-      return(this.items)
-    }else if(value === '1'){
-     return this.items.filter(item => item.isComplete)
-    }else{
-      return this.items.filter(item => !item.isComplete)
-    }
-  }
-  
-  toggleItem(item:WishItem){
-    item.isComplete = !item.isComplete
-    console.log(item)
-  }
-  
-  title = 'wishlist';
 }
