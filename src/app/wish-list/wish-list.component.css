@@ -2,3 +2,11 @@
     list-style: none;
     padding: 0;
 }
+.wish-list .form-check-label.completed {
+    text-decoration: line-through;
+    color: gray;
+  }
+
+  .wish-list .form-check-label {
+    cursor: pointer;
+  }
