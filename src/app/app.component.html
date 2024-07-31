@@ -2,9 +2,10 @@
 
 <div>  
   <add-wish-form
-  (addWish)="items.push($event)" 
+  (addWish)="addItem($event)"
   ></add-wish-form>
 </div>
+<!-- (addWish)="items.push($event)"  -->
 
 <div class="row mt-3">
   <wish-filter 
@@ -15,6 +16,7 @@
 <div class="row mt-3">
   <wish-list
     [wishes] = "items.filter(filter)"
+    (delete)="deleteItem($event)"
   ></wish-list>
 </div>
   

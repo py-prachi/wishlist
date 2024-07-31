@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WishItem } from '../shared/models/wishitems';
 
 @Component({
@@ -11,6 +11,7 @@ import { WishItem } from '../shared/models/wishitems';
 })
 export class WishListComponent  implements OnInit {
  @Input() wishes: WishItem[]  =[];
+ @Output() delete:EventEmitter<WishItem> = new EventEmitter();
 
  constructor(){}
 
@@ -21,6 +22,11 @@ export class WishListComponent  implements OnInit {
  toggleItem(item:WishItem){
   item.isComplete = !item.isComplete
   console.log(item)
+}
+
+onDelete(item:WishItem){
+  console.log('on delete has been triggered');
+  this.delete.emit(item)
 }
 
 }

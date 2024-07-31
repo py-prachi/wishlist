@@ -1,20 +1,24 @@
-<div *ngIf="wishes.length === 0;else showItems"> 
-    There are no items to display
+<div *ngIf="wishes.length === 0; else showItems">
+  There are no items to display
 </div>
 
-  <ng-template #showItems>
-    <ul class="wish-list"> 
-      <li *ngFor="let item of wishes">
+<ng-template #showItems>
+  <ul class="wish-list">
+    <li *ngFor="let item of wishes">
+      <div class="wish-item">
         <div class="form-check">
           <label class="form-check-label" [class.completed]="item.isComplete">
-          <input 
-          class="checkbox" 
-          type="checkbox"
-          [checked]="item.isComplete"
-          (click)="toggleItem(item)"
-          > {{item.wishText}}
+            <input
+              class="checkbox"
+              type="checkbox"
+              [checked]="item.isComplete"
+              (click)="toggleItem(item)"
+            />
+            {{ item.wishText }}
           </label>
         </div>
-      </li>
-    </ul>
-  </ng-template>
+        <button class="btn btn-danger" (click)="onDelete(item)">Delete</button>
+      </div>
+    </li>
+  </ul>
+</ng-template>
